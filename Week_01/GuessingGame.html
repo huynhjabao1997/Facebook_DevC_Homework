@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Number Guessing Game in HTML</h1>
+    <div>
+        <div id="message"></div>
+        <input type="number" id="number">
+        <button id="guessButton">Guess</button>
+        <br/>
+        <h3>Your last guessing number</h1>
+        <div id="pastResult"></div>
+    </div>
+</body>
+<script>
+    let min = 1;
+    let max = 100;
+    var randomNumber = Math.ceil(Math.random() * (+max - +min)) + + min;
+    let pastResult = '';
+    let count = 10;
+    let button = document.getElementById('guessButton');
+    button.addEventListener('click', function() {
+        let userInput = document.getElementById('number').value;
+        count--;
+        if (userInput == randomNumber) {
+            document.getElementById('message').innerHTML = 'Yay YOU ARE THE LORD OF THE GUESSES';
+            document.getElementById('message').style.backgroundColor = 'green';
+        } else if (userInput < randomNumber) {
+            document.getElementById('message').innerHTML = 'Your guess was too low, guess higher. You have ' + count + ' guesses left';
+            document.getElementById('message').style.backgroundColor = 'red';
+        } else if (userInput > randomNumber) {
+            document.getElementById('message').innerHTML = 'Your guess was too high, guess lower. You have ' + count + ' guesses left';
+            document.getElementById('message').style.backgroundColor = 'red';
+        }
+        if (count == 0) {
+            alert('You lose the game! The correct number is ' + randomNumber);
+            location.reload();
+        }
+        pastResult += userInput + '<br/>';
+        document.getElementById('pastResult').innerHTML = pastResult;
+    });
+</script>
+</html>
